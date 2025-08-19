@@ -8,7 +8,7 @@ import { FILTER_CATEGORIES } from '../constants';
 import { fetchJobCount } from '../services/jobService';
 
 const SearchConditionsPage: React.FC = () => {
-  const { selectedFilters, toggleFilter, resetFilters } = useFiltersStore();
+  const { selectedFilters, toggleFilter, resetFilters, setFilters } = useFiltersStore();
   const [jobCount, setJobCount] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAreaModalOpen, setIsAreaModalOpen] = useState(false);
@@ -18,6 +18,11 @@ const SearchConditionsPage: React.FC = () => {
     if (category) {
       toggleFilter(categoryId, optionId, category.limit);
     }
+  };
+  
+  const handleConfirmArea = (areas: string[]) => {
+    setFilters('area', areas);
+    closeAreaModal();
   };
 
   const updateJobCount = useCallback(async () => {
@@ -75,7 +80,13 @@ const SearchConditionsPage: React.FC = () => {
         onReset={resetFilters}
         onShowResults={handleShowResults}
       />
-      {isAreaModalOpen && <AreaModal onClose={closeAreaModal} />}
+      {isAreaModalOpen && (
+          <AreaModal 
+            onClose={closeAreaModal} 
+            onConfirm={handleConfirmArea}
+            initialSelection={selectedFilters['area'] || []}
+          />
+      )}
     </div>
   );
 };

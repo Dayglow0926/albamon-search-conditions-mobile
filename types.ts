@@ -15,4 +15,5 @@ export interface FiltersStore {
   toggleFilter: (categoryId: string, optionId: string, limit: number) => void;
   resetFilters: () => void;
   getSelectionCount: (categoryId: string) => number;
+  setFilters: (categoryId: string, optionIds: string[]) => void;
 }

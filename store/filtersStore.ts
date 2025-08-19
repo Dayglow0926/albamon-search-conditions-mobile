@@ -41,4 +41,20 @@ export const useFiltersStore = create<FiltersStore>((set, get) => ({
   resetFilters: () => {
     set({ selectedFilters: {} });
   },
+
+  setFilters: (categoryId: string, optionIds: string[]) => {
+    set((state) => {
+      if (optionIds.length === 0) {
+        const newSelectedFilters = { ...state.selectedFilters };
+        delete newSelectedFilters[categoryId];
+        return { selectedFilters: newSelectedFilters };
+      }
+      return {
+        selectedFilters: {
+          ...state.selectedFilters,
+          [categoryId]: optionIds,
+        },
+      };
+    });
+  }
 }));
