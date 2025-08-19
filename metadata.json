@@ -1,0 +1,5 @@
+{
+  "name": "Albamon Job Filter",
+  "description": "A mobile-first implementation of the Albamon job search filter page using React, TypeScript, and Tailwind CSS. It allows users to select various job conditions and see the number of available results.",
+  "requestFramePermissions": []
+}
